@@ -1,6 +1,7 @@
 package com.br.bibliotech.model.livro;
 import com.br.bibliotech.util.entity.EntidadeAuditavel;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -31,7 +32,8 @@ public class Livro extends EntidadeAuditavel {
     private String titulo;
 
     @Column
-    private LocalDate dataPublicacao;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    private LocalDate dataNascimento;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "genero", length = 30, nullable = false)

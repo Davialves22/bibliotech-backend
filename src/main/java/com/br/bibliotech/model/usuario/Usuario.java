@@ -2,6 +2,7 @@ package com.br.bibliotech.model.usuario;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.SQLRestriction;
 
 import com.br.bibliotech.util.entity.EntidadeAuditavel;
@@ -16,7 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity // transforma numa classe exisitivel no jpa
-@Table(name = "Cliente") // especifica que a classe sera convertida em tabela
+@Table(name = "Usuario") // especifica que a classe sera convertida em tabela
 @SQLRestriction("habilitado = true") // acresenta em todas as consultas uma clausula where: where habilidado = true
 
 @Builder // forma de instanciar objetos da classe
@@ -31,6 +32,7 @@ public class Usuario extends EntidadeAuditavel {
     private String nome;
 
     @Column
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
 
     @Column
