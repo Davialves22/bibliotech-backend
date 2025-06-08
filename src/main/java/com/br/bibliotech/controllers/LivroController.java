@@ -1,7 +1,7 @@
 package com.br.bibliotech.api.livro;
 
 import com.br.bibliotech.model.livro.Livro;
-import com.br.bibliotech.model.livro.LivroService;
+import com.br.bibliotech.service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

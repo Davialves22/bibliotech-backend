@@ -1,7 +1,7 @@
 package com.br.bibliotech.api.Usuario;
 
 import com.br.bibliotech.model.usuario.Usuario;
-import com.br.bibliotech.model.usuario.UsuarioService;
+import com.br.bibliotech.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
