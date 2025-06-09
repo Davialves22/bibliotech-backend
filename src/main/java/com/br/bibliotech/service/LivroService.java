@@ -1,6 +1,8 @@
-package com.br.bibliotech.model.livro;
+package com.br.bibliotech.service;
 
 import com.br.bibliotech.api.livro.LivroRequest;
+import com.br.bibliotech.model.livro.Livro;
+import com.br.bibliotech.repository.LivroRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

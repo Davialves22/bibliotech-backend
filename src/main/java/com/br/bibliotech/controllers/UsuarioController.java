@@ -1,5 +1,6 @@
-package com.br.bibliotech.api.Usuario;
+package com.br.bibliotech.controllers;
 
+import com.br.bibliotech.api.Usuario.UsuarioRequest;
 import com.br.bibliotech.model.usuario.Usuario;
 import com.br.bibliotech.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;

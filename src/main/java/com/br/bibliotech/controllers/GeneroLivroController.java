@@ -1,4 +1,4 @@
-package com.br.bibliotech.api.livro;
+package com.br.bibliotech.controllers;
 
 import com.br.bibliotech.model.livro.GeneroLivro;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,8 @@
-package com.br.bibliotech.model.usuario;
+package com.br.bibliotech.service;
 
 import com.br.bibliotech.api.Usuario.UsuarioRequest;
+import com.br.bibliotech.model.usuario.Usuario;
+import com.br.bibliotech.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

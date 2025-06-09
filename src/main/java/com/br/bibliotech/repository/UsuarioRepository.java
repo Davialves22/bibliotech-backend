@@ -1,5 +1,6 @@
-package com.br.bibliotech.model.usuario;
+package com.br.bibliotech.repository;
 
+import com.br.bibliotech.model.usuario.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

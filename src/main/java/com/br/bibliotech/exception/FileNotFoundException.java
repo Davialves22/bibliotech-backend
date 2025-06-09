@@ -3,14 +3,14 @@ package com.br.bibliotech.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-public class FileStorageException  extends RuntimeException{
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class FileNotFoundException extends RuntimeException{
 
-    public FileStorageException (String message) {
+    public FileNotFoundException(String message) {
         super(message);
     }
 
-    public FileStorageException (String message, Throwable cause) {
+    public FileNotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
 }

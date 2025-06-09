@@ -1,5 +1,6 @@
-package com.br.bibliotech.api.livro;
+package com.br.bibliotech.controllers;
 
+import com.br.bibliotech.api.livro.LivroRequest;
 import com.br.bibliotech.model.livro.Livro;
 import com.br.bibliotech.service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
