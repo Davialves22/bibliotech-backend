@@ -1,18 +1,18 @@
 # ========================
-# Nome da aplicação
+# Nome da aplicaï¿½ï¿½o
 # ========================
 spring:
   application:
     name: bibliotech-api
 
   # ========================
-  # Configuração adicional via .env (opcional)
+  # Configuraï¿½ï¿½o adicional via .env (opcional)
   # ========================
   config:
     import: optional:file:.env[.properties]
 
   # ========================
-  # Configuração do banco de dados (PostgreSQL)
+  # Configuraï¿½ï¿½o do banco de dados (PostgreSQL)
   # ========================
   datasource:
     driver-class-name: org.postgresql.Driver
@@ -21,7 +21,7 @@ spring:
     password: root
 
   # ========================
-  # Configurações para upload de arquivos (Multipart)
+  # Configuraï¿½ï¿½es para upload de arquivos (Multipart)
   # ========================
   servlet:
     multipart:
@@ -31,7 +31,7 @@ spring:
       max-request-size: 500MB
 
   # ========================
-  # Configuração do JPA / Hibernate
+  # Configuraï¿½ï¿½o do JPA / Hibernate
   # ========================
   jpa:
     hibernate:
@@ -46,13 +46,19 @@ spring:
     generate-ddl: true
 
 # ========================
-# Diretório para uploads (imagens/PDFs)
+# Diretï¿½rio para uploads (imagens/PDFs)
 # ========================
 file:
   upload-dir: E:/Projetos-Spring/bibliotech-backend/src/main/java/com/br/bibliotech/Uploads
 
 # ========================
-# Configuração do servidor (porta)
+# Configuraï¿½ï¿½o do servidor (porta)
 # ========================
+spring-doc:
+  paths-to-match: /api/**/v1/**
+  swagger-ui:
+    use-root-path:true
+
+
 server:
   port: 8080
