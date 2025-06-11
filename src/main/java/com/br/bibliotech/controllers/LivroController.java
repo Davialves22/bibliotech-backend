@@ -3,6 +3,9 @@ package com.br.bibliotech.controllers;
 import com.br.bibliotech.api.livro.LivroRequest;
 import com.br.bibliotech.model.livro.Livro;
 import com.br.bibliotech.service.LivroService;
+import com.br.bibliotech.controllers.docs.LivroControllerDocs;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,34 +16,49 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/livro")
+@RequestMapping("/api/livro/v1")
 @CrossOrigin
-public class LivroController {
+
+@Tag(name = "Book", description = "Endpoints para Tratamento de Livros")
+public class LivroController implements LivroControllerDocs {
 
     @Autowired
     private LivroService livroService;
 
-    // Criar livro com imagem e PDF
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(consumes = {
+            MediaType.MULTIPART_FORM_DATA_VALUE,
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_YAML_VALUE
+    })
+    @Override
     public ResponseEntity<Livro> save(@ModelAttribute LivroRequest request) throws IOException {
         Livro livro = livroService.save(request);
         return new ResponseEntity<>(livro, HttpStatus.CREATED);
     }
 
-    // Listar todos os livros
-    @GetMapping
+    @GetMapping(produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_YAML_VALUE
+    })
+    @Override
     public List<Livro> listarTodos() {
         return livroService.listarTodos();
     }
 
-    // Buscar livro por ID
-    @GetMapping("/{id}")
-    public Livro obterPorID(@PathVariable Long id) {
-        return livroService.obterPorID(id);
+    @GetMapping(value = "/{id}", produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_YAML_VALUE
+    })
+    @Override
+    public ResponseEntity<Livro> obterPorID(@PathVariable Long id) {
+        Livro livro = livroService.obterPorID(id);
+        return ResponseEntity.ok(livro);
     }
 
-    // Buscar PDF do livro
-    @GetMapping("/pdf/{id}")
+    @GetMapping(value = "/pdf/{id}", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<byte[]> obterPdf(@PathVariable Long id) {
         Livro livro = livroService.obterPorID(id);
         if (livro.getPdf() == null)
@@ -51,8 +69,7 @@ public class LivroController {
                 .body(livro.getPdf());
     }
 
-    // Buscar imagem do livro
-    @GetMapping("/imagem/{id}")
+    @GetMapping(value = "/imagem/{id}")
     public ResponseEntity<byte[]> obterImagem(@PathVariable Long id) {
         Livro livro = livroService.obterPorID(id);
 
@@ -60,8 +77,6 @@ public class LivroController {
             return ResponseEntity.notFound().build();
 
         byte[] imagem = livro.getImagem();
-
-        // Detectar o tipo da imagem dinamicamente (PNG ou JPEG, por exemplo)
         MediaType mediaType = detectarMediaType(imagem);
 
         return ResponseEntity.ok()
@@ -69,14 +84,12 @@ public class LivroController {
                 .body(imagem);
     }
 
-    // Atualizar livro (usando multipart)
     @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> update(@PathVariable Long id, @ModelAttribute LivroRequest request) throws IOException {
         livroService.update(id, request);
         return ResponseEntity.ok().build();
     }
 
-    // Deletar livro
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         livroService.delete(id);
@@ -99,8 +112,6 @@ public class LivroController {
             return MediaType.IMAGE_JPEG;
         }
 
-        // Padrão como fallback
         return MediaType.APPLICATION_OCTET_STREAM;
     }
-
 }
