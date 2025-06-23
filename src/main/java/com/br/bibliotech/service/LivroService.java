@@ -20,6 +20,11 @@ public class LivroService {
     // Salvar livro
     @Transactional
     public Livro save(LivroRequest request) throws IOException {
+        System.out.println("📤 Imagem recebida: " +
+                (request.getImagemCapa() != null ? request.getImagemCapa().getOriginalFilename() : "NULA"));
+        System.out.println("📤 PDF recebido: " +
+                (request.getPdf() != null ? request.getPdf().getOriginalFilename() : "NULO"));
+
         Livro livro = request.build();
 
         if (request.getImagemCapa() != null && !request.getImagemCapa().isEmpty()) {
@@ -42,13 +47,12 @@ public class LivroService {
                 .toList();
     }
 
-
-        // Buscar livro por ID
-        public LivroResponse obterPorID(Long id) {
-            Livro livro = repository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
-            return LivroResponse.fromEntity(livro);
-        }
+    // Buscar livro por ID
+    public LivroResponse obterPorID(Long id) {
+        Livro livro = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+        return LivroResponse.fromEntity(livro);
+    }
 
     // Retorna a entidade Livro (para obter pdf e imagem)
     public Livro obterLivroPorID(Long id) {
@@ -56,10 +60,14 @@ public class LivroService {
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
     }
 
-
     // Atualizar livro
     @Transactional
     public void update(Long id, LivroRequest request) throws IOException {
+        System.out.println("📤 Atualizando imagem: " +
+                (request.getImagemCapa() != null ? request.getImagemCapa().getOriginalFilename() : "NULA"));
+        System.out.println("📤 Atualizando PDF: " +
+                (request.getPdf() != null ? request.getPdf().getOriginalFilename() : "NULO"));
+
         Livro livro = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
 
