@@ -1,28 +1,21 @@
-# ========================
-# Nome da aplica��o
-# ========================
 spring:
   application:
     name: bibliotech-api
 
-  # ========================
-  # Configura��o adicional via .env (opcional)
-  # ========================
   config:
     import: optional:file:.env[.properties]
 
-  # ========================
-  # Configura��o do banco de dados (PostgreSQL)
-  # ========================
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5438/bibliotech_db
     username: postgres
     password: root
 
-  # ========================
-  # Configura��es para upload de arquivos (Multipart)
-  # ========================
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:data.sql
+
   servlet:
     multipart:
       enabled: true
@@ -30,10 +23,8 @@ spring:
       max-file-size: 500MB
       max-request-size: 500MB
 
-  # ========================
-  # Configura��o do JPA / Hibernate
-  # ========================
   jpa:
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: update
     show-sql: true
@@ -45,20 +36,5 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     generate-ddl: true
 
-# ========================
-# Diret�rio para uploads (imagens/PDFs)
-# ========================
 file:
-  upload-dir: E:/Projetos-Spring/bibliotech-backend/src/main/java/com/br/bibliotech/Uploads
-
-# ========================
-# Configura��o do servidor (porta)
-# ========================
-spring-doc:
-  paths-to-match: /api/**/v1/**
-  swagger-ui:
-    use-root-path:true
-
-
-server:
-  port: 8080
+  uploadDir: E:/Projetos-SpringBoot/bibliotech-backend/src/main/java/com/br/bibliotech/Uploads

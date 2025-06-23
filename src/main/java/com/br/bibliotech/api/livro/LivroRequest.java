@@ -17,13 +17,11 @@ public class LivroRequest {
     private String titulo;
     private LocalDate dataPublicacao;
     private GeneroLivro genero;
-    private BigDecimal preco;
 
     private String nomeAutor;
     private String nacionalidadeAutor;
 
-    private MultipartFile imagem;
-    private String imagemUrl;
+    private MultipartFile imagemCapa;
     private MultipartFile pdf;
 
     public Livro build() {
@@ -32,10 +30,8 @@ public class LivroRequest {
         livro.setTitulo(titulo);
         livro.setDataPublicacao(dataPublicacao);
         livro.setGenero(genero);
-        livro.setPreco(preco);
         livro.setNomeAutor(nomeAutor);
         livro.setNacionalidadeAutor(nacionalidadeAutor);
-        livro.setImagemUrl(imagemUrl);
 
         return livro;
     }

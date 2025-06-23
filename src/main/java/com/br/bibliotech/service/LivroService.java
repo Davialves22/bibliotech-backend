@@ -1,6 +1,7 @@
 package com.br.bibliotech.service;
 
 import com.br.bibliotech.api.livro.LivroRequest;
+import com.br.bibliotech.api.livro.LivroResponse;
 import com.br.bibliotech.model.livro.Livro;
 import com.br.bibliotech.repository.LivroRepository;
 import jakarta.transaction.Transactional;
@@ -21,12 +22,8 @@ public class LivroService {
     public Livro save(LivroRequest request) throws IOException {
         Livro livro = request.build();
 
-        if (request.getImagem() != null && !request.getImagem().isEmpty()) {
-            livro.setImagem(request.getImagem().getBytes());
-        }
-
-        if (request.getImagemUrl() != null && !request.getImagemUrl().isEmpty()) {
-            livro.setImagemUrl(request.getImagemUrl());
+        if (request.getImagemCapa() != null && !request.getImagemCapa().isEmpty()) {
+            livro.setImagem(request.getImagemCapa().getBytes());
         }
 
         if (request.getPdf() != null && !request.getPdf().isEmpty()) {
@@ -39,15 +36,26 @@ public class LivroService {
     }
 
     // Listar todos os livros
-    public List<Livro> listarTodos() {
-        return repository.findAll();
+    public List<LivroResponse> listarTodos() {
+        return repository.findAll().stream()
+                .map(LivroResponse::fromEntity)
+                .toList();
     }
 
-    // Buscar livro por ID
-    public Livro obterPorID(Long id) {
+
+        // Buscar livro por ID
+        public LivroResponse obterPorID(Long id) {
+            Livro livro = repository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+            return LivroResponse.fromEntity(livro);
+        }
+
+    // Retorna a entidade Livro (para obter pdf e imagem)
+    public Livro obterLivroPorID(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
     }
+
 
     // Atualizar livro
     @Transactional
@@ -62,16 +70,10 @@ public class LivroService {
         livro.setNomeAutor(request.getNomeAutor());
         livro.setNacionalidadeAutor(request.getNacionalidadeAutor());
         livro.setDataPublicacao(request.getDataPublicacao());
-        livro.setPreco(request.getPreco());
 
         // Atualiza imagem se enviada
-        if (request.getImagem() != null && !request.getImagem().isEmpty()) {
-            livro.setImagem(request.getImagem().getBytes());
-        }
-
-        // Atualiza URL da imagem se enviada
-        if (request.getImagemUrl() != null && !request.getImagemUrl().isEmpty()) {
-            livro.setImagemUrl(request.getImagemUrl());
+        if (request.getImagemCapa() != null && !request.getImagemCapa().isEmpty()) {
+            livro.setImagem(request.getImagemCapa().getBytes());
         }
 
         // Atualiza PDF se enviado

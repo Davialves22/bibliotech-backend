@@ -3,8 +3,8 @@ package com.br.bibliotech.controllers.docs;
 import java.io.IOException;
 import java.util.List;
 
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import com.br.bibliotech.api.livro.LivroResponse;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -29,7 +29,7 @@ public interface LivroControllerDocs {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
             }
     )
-    ResponseEntity<Livro> save(LivroRequest request) throws IOException;
+    ResponseEntity<LivroResponse> save(@ModelAttribute LivroRequest request) throws IOException;
 
     @Operation(summary = "Listando todos os Livros",
             description = "Listando todos os Livros",
@@ -45,7 +45,7 @@ public interface LivroControllerDocs {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
             }
     )
-    List<Livro> listarTodos();
+    List<LivroResponse> listarTodos();
 
     @Operation(summary = "Procurando Pelo Livro",
             description = "Procurando Por um Livro Específico",
@@ -57,7 +57,7 @@ public interface LivroControllerDocs {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
             }
     )
-    ResponseEntity<Livro> obterPorID(Long id);
+    ResponseEntity<LivroResponse> obterPorID(@PathVariable Long id);
 
     @Operation(summary = "Atualizando o Livro",
             description = "Atualizando o Livro por ID",
@@ -69,7 +69,7 @@ public interface LivroControllerDocs {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
             }
     )
-    ResponseEntity<Void> update(Long id, LivroRequest request) throws IOException;
+    ResponseEntity<Void> update(@PathVariable Long id, @ModelAttribute LivroRequest request) throws IOException;
 
     @Operation(summary = "Deletando o Livro",
             description = "Deletando um Livro por ID",
@@ -81,5 +81,5 @@ public interface LivroControllerDocs {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
             }
     )
-    ResponseEntity<Void> delete(Long id);
+    ResponseEntity<Void> delete(@PathVariable Long id);
 }

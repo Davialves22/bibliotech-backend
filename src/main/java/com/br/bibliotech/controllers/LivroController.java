@@ -1,6 +1,7 @@
 package com.br.bibliotech.controllers;
 
 import com.br.bibliotech.api.livro.LivroRequest;
+import com.br.bibliotech.api.livro.LivroResponse;
 import com.br.bibliotech.model.livro.Livro;
 import com.br.bibliotech.service.LivroService;
 import com.br.bibliotech.controllers.docs.LivroControllerDocs;
@@ -18,7 +19,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/livro/v1")
 @CrossOrigin
-
 @Tag(name = "Book", description = "Endpoints para Tratamento de Livros")
 public class LivroController implements LivroControllerDocs {
 
@@ -32,9 +32,9 @@ public class LivroController implements LivroControllerDocs {
             MediaType.APPLICATION_YAML_VALUE
     })
     @Override
-    public ResponseEntity<Livro> save(@ModelAttribute LivroRequest request) throws IOException {
+    public ResponseEntity<LivroResponse> save(@ModelAttribute LivroRequest request) throws IOException {
         Livro livro = livroService.save(request);
-        return new ResponseEntity<>(livro, HttpStatus.CREATED);
+        return new ResponseEntity<>(LivroResponse.fromEntity(livro), HttpStatus.CREATED);
     }
 
     @GetMapping(produces = {
@@ -43,24 +43,23 @@ public class LivroController implements LivroControllerDocs {
             MediaType.APPLICATION_YAML_VALUE
     })
     @Override
-    public List<Livro> listarTodos() {
+    public List<LivroResponse> listarTodos() {
         return livroService.listarTodos();
     }
-
     @GetMapping(value = "/{id}", produces = {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE,
             MediaType.APPLICATION_YAML_VALUE
     })
     @Override
-    public ResponseEntity<Livro> obterPorID(@PathVariable Long id) {
-        Livro livro = livroService.obterPorID(id);
-        return ResponseEntity.ok(livro);
+    public ResponseEntity<LivroResponse> obterPorID(@PathVariable Long id) {
+        return ResponseEntity.ok(livroService.obterPorID(id)); // sem conversão extra
     }
 
     @GetMapping(value = "/pdf/{id}", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<byte[]> obterPdf(@PathVariable Long id) {
-        Livro livro = livroService.obterPorID(id);
+        // Aqui o service retorna a entidade Livro (com o pdf em byte[])
+        Livro livro = livroService.obterLivroPorID(id);
         if (livro.getPdf() == null)
             return ResponseEntity.notFound().build();
 
@@ -71,7 +70,8 @@ public class LivroController implements LivroControllerDocs {
 
     @GetMapping(value = "/imagem/{id}")
     public ResponseEntity<byte[]> obterImagem(@PathVariable Long id) {
-        Livro livro = livroService.obterPorID(id);
+        // Também retorna a entidade Livro para obter a imagem em bytes
+        Livro livro = livroService.obterLivroPorID(id);
 
         if (livro.getImagem() == null)
             return ResponseEntity.notFound().build();
@@ -85,12 +85,14 @@ public class LivroController implements LivroControllerDocs {
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Override
     public ResponseEntity<Void> update(@PathVariable Long id, @ModelAttribute LivroRequest request) throws IOException {
         livroService.update(id, request);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
+    @Override
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         livroService.delete(id);
         return ResponseEntity.ok().build();
