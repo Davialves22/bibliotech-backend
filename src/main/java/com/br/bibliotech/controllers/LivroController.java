@@ -1,20 +1,29 @@
 package com.br.bibliotech.controllers;
 
-import com.br.bibliotech.api.livro.LivroRequest;
-import com.br.bibliotech.api.livro.LivroResponse;
-import com.br.bibliotech.model.livro.Livro;
-import com.br.bibliotech.service.LivroService;
-import com.br.bibliotech.controllers.docs.LivroControllerDocs;
+import java.io.IOException;
+import java.util.List;
 
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-import java.util.List;
+import com.br.bibliotech.api.livro.LivroRequest;
+import com.br.bibliotech.api.livro.LivroResponse;
+import com.br.bibliotech.controllers.docs.LivroControllerDocs;
+import com.br.bibliotech.model.livro.Livro;
+import com.br.bibliotech.service.LivroService;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/livro/v1")
@@ -46,6 +55,7 @@ public class LivroController implements LivroControllerDocs {
     public List<LivroResponse> listarTodos() {
         return livroService.listarTodos();
     }
+
     @GetMapping(value = "/{id}", produces = {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE,
@@ -56,9 +66,9 @@ public class LivroController implements LivroControllerDocs {
         return ResponseEntity.ok(livroService.obterPorID(id)); // sem conversão extra
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping(value = "/pdf/{id}", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<byte[]> obterPdf(@PathVariable Long id) {
-        // Aqui o service retorna a entidade Livro (com o pdf em byte[])
         Livro livro = livroService.obterLivroPorID(id);
         if (livro.getPdf() == null)
             return ResponseEntity.notFound().build();
@@ -68,11 +78,10 @@ public class LivroController implements LivroControllerDocs {
                 .body(livro.getPdf());
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping(value = "/imagem/{id}")
     public ResponseEntity<byte[]> obterImagem(@PathVariable Long id) {
-        // Também retorna a entidade Livro para obter a imagem em bytes
         Livro livro = livroService.obterLivroPorID(id);
-
         if (livro.getImagem() == null)
             return ResponseEntity.notFound().build();
 

@@ -12,7 +12,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Version;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,7 +24,7 @@ public abstract class EntidadeAuditavel extends EntidadeNegocio {
 
     @JsonIgnore
     @Version
-    private Long versao;
+    private Long versao = 0L;
 
     @JsonIgnore
     @CreatedDate

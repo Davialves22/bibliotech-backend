@@ -1,28 +1,26 @@
 package com.br.bibliotech.model.livro;
-import com.br.bibliotech.util.entity.EntidadeAuditavel;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.*;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import org.hibernate.annotations.SQLRestriction;
-
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "livro")
-@SQLRestriction("habilitado = true") // (opcional) aplica filtro em todas as queries
-@Builder
+import org.hibernate.annotations.Where;
+
+import com.br.bibliotech.util.entity.EntidadeAuditavel;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
+@Table(name = "livro")
+@Where(clause = "habilitado = true")
 public class Livro extends EntidadeAuditavel {
 
     @Column
@@ -52,4 +50,8 @@ public class Livro extends EntidadeAuditavel {
     @Lob
     @Column(name = "pdf")
     private byte[] pdf;
+
+    @Column(nullable = false)
+    private Boolean habilitado = true; // campo importante para soft delete
+
 }
