@@ -1,12 +1,13 @@
 package com.br.bibliotech.api.livro;
 
-import com.br.bibliotech.model.livro.GeneroLivro;
-import com.br.bibliotech.model.livro.Livro;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDate;
 import java.util.Base64;
+
+import com.br.bibliotech.model.livro.GeneroLivro;
+import com.br.bibliotech.model.livro.Livro;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -42,8 +43,8 @@ public class LivroResponse {
 
         // Se quiser enviar pdf como base64:
         // if (livro.getPdf() != null) {
-        //    String base64Pdf = Base64.getEncoder().encodeToString(livro.getPdf());
-        //    dto.setPdf("data:application/pdf;base64," + base64Pdf);
+        // String base64Pdf = Base64.getEncoder().encodeToString(livro.getPdf());
+        // dto.setPdf("data:application/pdf;base64," + base64Pdf);
         // }
 
         return dto;

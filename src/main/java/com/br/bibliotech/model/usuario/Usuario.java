@@ -2,10 +2,10 @@ package com.br.bibliotech.model.usuario;
 
 import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.SQLRestriction;
 
 import com.br.bibliotech.util.entity.EntidadeAuditavel;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

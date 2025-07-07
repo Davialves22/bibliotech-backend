@@ -30,68 +30,65 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "People", description = "Endpoints para Tratamento de usuarios")
 public class UsuarioController implements UsuarioControllerDocs {
 
-    @Autowired
-    private UsuarioService usuarioService;
+        @Autowired
+        private UsuarioService usuarioService;
 
-    // Criar usuário
-    @PostMapping(consumes = {
-            MediaType.APPLICATION_JSON_VALUE,
-            MediaType.APPLICATION_XML_VALUE,
-            MediaType.APPLICATION_YAML_VALUE
-    })
+        // Criar usuário
+        @PostMapping(consumes = {
+                        MediaType.APPLICATION_JSON_VALUE,
+                        MediaType.APPLICATION_XML_VALUE,
+                        MediaType.APPLICATION_YAML_VALUE
+        })
 
-    @Override
-    public ResponseEntity<Usuario> save(@RequestBody UsuarioRequest request) {
-        Usuario usuario = usuarioService.save(request);
-        return new ResponseEntity<>(usuario, HttpStatus.CREATED);
-    }
+        @Override
+        public ResponseEntity<Usuario> save(@RequestBody UsuarioRequest request) {
+                Usuario usuario = usuarioService.save(request);
+                return new ResponseEntity<>(usuario, HttpStatus.CREATED);
+        }
 
-    // Listar todos os usuários
-    @GetMapping(produces = {
-            MediaType.APPLICATION_JSON_VALUE,
-            MediaType.APPLICATION_XML_VALUE,
-            MediaType.APPLICATION_YAML_VALUE
-    })
-    @Override
-    public List<Usuario> listarTodos() {
-        return usuarioService.listarTodos();
-    }
+        // Listar todos os usuários
+        @GetMapping(produces = {
+                        MediaType.APPLICATION_JSON_VALUE,
+                        MediaType.APPLICATION_XML_VALUE,
+                        MediaType.APPLICATION_YAML_VALUE
+        })
+        @Override
+        public List<Usuario> listarTodos() {
+                return usuarioService.listarTodos();
+        }
 
-    // Buscar usuário por ID
-    @GetMapping(value = "/{id}",
-            produces = {
-                    MediaType.APPLICATION_JSON_VALUE,
-                    MediaType.APPLICATION_XML_VALUE,
-                    MediaType.APPLICATION_YAML_VALUE
-            })
-    @Override
-    public ResponseEntity<Usuario> obterPorID(@PathVariable Long id) {
-        Usuario usuario = usuarioService.obterPorID(id);
-        return ResponseEntity.ok(usuario);
-    }
+        // Buscar usuário por ID
+        @GetMapping(value = "/{id}", produces = {
+                        MediaType.APPLICATION_JSON_VALUE,
+                        MediaType.APPLICATION_XML_VALUE,
+                        MediaType.APPLICATION_YAML_VALUE
+        })
+        @Override
+        public ResponseEntity<Usuario> obterPorID(@PathVariable Long id) {
+                Usuario usuario = usuarioService.obterPorID(id);
+                return ResponseEntity.ok(usuario);
+        }
 
-    // Atualizar usuário
-    @PutMapping(value = "/{id}",
-            produces = {
-                    MediaType.APPLICATION_JSON_VALUE,
-                    MediaType.APPLICATION_XML_VALUE,
-                    MediaType.APPLICATION_YAML_VALUE
-            })
-    @Override
-    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody UsuarioRequest request) {
-        usuarioService.update(id, request);
-        return ResponseEntity.ok().build();
-    }
+        // Atualizar usuário
+        @PutMapping(value = "/{id}", produces = {
+                        MediaType.APPLICATION_JSON_VALUE,
+                        MediaType.APPLICATION_XML_VALUE,
+                        MediaType.APPLICATION_YAML_VALUE
+        })
+        @Override
+        public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody UsuarioRequest request) {
+                usuarioService.update(id, request);
+                return ResponseEntity.ok().build();
+        }
 
-    // Deletar usuário (desabilitar)
-    @DeleteMapping(value = "/{id}",
-            produces = {
-                    MediaType.APPLICATION_JSON_VALUE,
-                    MediaType.APPLICATION_XML_VALUE,
-                    MediaType.APPLICATION_YAML_VALUE})
-    @Override
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        usuarioService.delete(id);
-        return ResponseEntity.ok().build();
-    }
+        // Deletar usuário (desabilitar)
+        @DeleteMapping(value = "/{id}", produces = {
+                        MediaType.APPLICATION_JSON_VALUE,
+                        MediaType.APPLICATION_XML_VALUE,
+                        MediaType.APPLICATION_YAML_VALUE })
+        @Override
+        public ResponseEntity<Void> delete(@PathVariable Long id) {
+                usuarioService.delete(id);
+                return ResponseEntity.ok().build();
+        }
 }
