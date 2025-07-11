@@ -37,4 +37,4 @@ spring:
     generate-ddl: true
 
 file:
-  uploadDir: E:/Projetos-SpringBoot/bibliotech-backend/src/main/java/com/br/bibliotech/Uploads
+  uploadDir: C:Users/Aluno/Pictures/bibliotech-backend/src/main/java/com/br/bibliotech/Uploads
