@@ -9,7 +9,8 @@ public class FileStorageConfig {
 
     private String upload_dir;
 
-    public FileStorageConfig() {}
+    public FileStorageConfig() {
+    }
 
     public String getUpload_dir() {
         return upload_dir;
