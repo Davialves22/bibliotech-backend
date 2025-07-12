@@ -46,8 +46,7 @@ spring:
       mail.smtp.starttls.required: true
 
 file:
-  upload_dir: ${user.home}/Pictures/bibliotech-backend/src/main/java/com/br/bibliotech/Uploads
-
+  uploadDir: C:Users/Aluno/Pictures/bibliotech-backend/src/main/java/com/br/bibliotech/Uploads
 
 email:
   subject: "Default Subject"
