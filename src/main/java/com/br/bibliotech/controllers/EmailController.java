@@ -2,6 +2,7 @@ package com.br.bibliotech.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,10 +48,10 @@ public class EmailController implements EmailControllerDocs {
    * @param attachment   Arquivo a ser enviado como anexo (Multipart).
    * @return Mensagem de sucesso com status HTTP 200.
    */
-  @PostMapping("/comAnexo")
+  @PostMapping(value = "/comAnexo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
   @Override
   public ResponseEntity<String> sendEmailWithAttachment(
-      @RequestParam("emailRequest ") String emailRequest,
+      @RequestParam("emailRequest") String emailRequest,
       @RequestParam("attachment") MultipartFile attachment) {
 
     service.sendEmailWithAttachment(emailRequest, attachment);
