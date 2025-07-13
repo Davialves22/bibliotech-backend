@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,6 +14,12 @@ import com.br.bibliotech.controllers.docs.EmailControllerDocs;
 import com.br.bibliotech.data.dto.request.EmailRequestDto;
 import com.br.bibliotech.service.EmailService;
 
+/**
+ * Controller responsável por expor endpoints REST para envio de e-mails.
+ * 
+ * Disponibiliza operações para envio de e-mail simples e e-mail com anexo,
+ * delegando a lógica de envio ao {@link EmailService}.
+ */
 @RestController
 @RequestMapping("/api/email/v1")
 public class EmailController implements EmailControllerDocs {
@@ -20,6 +27,12 @@ public class EmailController implements EmailControllerDocs {
   @Autowired
   private EmailService service;
 
+  /**
+   * Endpoint para envio de e-mail simples (sem anexo).
+   * 
+   * @param emailRequest Objeto contendo destinatário, assunto e corpo do e-mail.
+   * @return Mensagem de sucesso com status HTTP 200.
+   */
   @PostMapping
   @Override
   public ResponseEntity<String> sendEmail(@RequestBody EmailRequestDto emailRequest) {
@@ -27,9 +40,21 @@ public class EmailController implements EmailControllerDocs {
     return new ResponseEntity<>("e-Mail Enviado Com Sucesso!", HttpStatus.OK);
   }
 
+  /**
+   * Endpoint para envio de e-mail com anexo.
+   * 
+   * @param emailRequest JSON como string com os dados do e-mail.
+   * @param attachment   Arquivo a ser enviado como anexo (Multipart).
+   * @return Mensagem de sucesso com status HTTP 200.
+   */
+  @PostMapping("/comAnexo")
   @Override
-  public ResponseEntity<String> sendEmailWithAttachment(String emailRequestJson, MultipartFile multipartFile) {
-    return null;
+  public ResponseEntity<String> sendEmailWithAttachment(
+      @RequestParam("emailRequest ") String emailRequest,
+      @RequestParam("attachment") MultipartFile attachment) {
+
+    service.sendEmailWithAttachment(emailRequest, attachment);
+    return new ResponseEntity<>("e-mail com anexo enviado com Sucesso", HttpStatus.OK);
   }
 
 }
