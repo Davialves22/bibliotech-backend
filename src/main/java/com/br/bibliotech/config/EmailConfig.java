@@ -7,9 +7,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Configuration
-@ConfigurationProperties(prefix = "spring.mail")
 @Getter
 @Setter
+@ConfigurationProperties(prefix = "spring.mail")
 public class EmailConfig {
 
   // Propriedades para envio e recebimento de email

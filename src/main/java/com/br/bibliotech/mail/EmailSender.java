@@ -30,7 +30,7 @@ import jakarta.mail.internet.MimeMessage;
 @Component
 public class EmailSender implements Serializable {
 
-  private static final Logger logger = LoggerFactory.getLogger(EmailSender.class);
+  Logger logger = LoggerFactory.getLogger(EmailSender.class);
 
   private final JavaMailSender mailSender;
   private String to;
