@@ -1,23 +1,25 @@
 package com.br.bibliotech.service;
 
-import com.br.bibliotech.api.Usuario.UsuarioRequest;
-import com.br.bibliotech.model.usuario.Usuario;
-import com.br.bibliotech.repository.UsuarioRepository;
-import jakarta.transaction.Transactional;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.br.bibliotech.api.person.PersonRequest;
+import com.br.bibliotech.model.usuario.Usuario;
+import com.br.bibliotech.repository.UsuarioRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
-public class UsuarioService {
+public class PersonService {
 
     @Autowired
     private UsuarioRepository repository;
 
     // Salvar usuário
     @Transactional
-    public Usuario save(UsuarioRequest request) {
+    public Usuario save(PersonRequest request) {
         Usuario usuario = request.build(); // Supondo que UsuarioRequest tenha método build()
 
         usuario.setHabilitado(Boolean.TRUE); // Como no Livro, habilitado = true
@@ -38,7 +40,7 @@ public class UsuarioService {
 
     // Atualizar usuário
     @Transactional
-    public void update(Long id, UsuarioRequest request) {
+    public void update(Long id, PersonRequest request) {
         Usuario usuario = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 

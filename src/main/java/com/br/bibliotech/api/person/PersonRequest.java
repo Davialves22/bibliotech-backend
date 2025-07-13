@@ -1,4 +1,4 @@
-package com.br.bibliotech.api.Usuario;
+package com.br.bibliotech.api.person;
 
 import java.time.LocalDate;
 
@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UsuarioRequest {
+public class PersonRequest {
 
     private String nome;
 

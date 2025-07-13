@@ -1,4 +1,4 @@
-package com.br.bibliotech.api.Usuario;
+package com.br.bibliotech.api.person;
 
 import java.time.LocalDate;
 
@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UsuarioResponse {
+public class PersonResponse {
 
   private Long id;
   private String nome;
@@ -19,8 +19,8 @@ public class UsuarioResponse {
   private String email;
 
   // Método de conversão de entidade para DTO
-  public static UsuarioResponse fromEntity(Usuario usuario) {
-    UsuarioResponse dto = new UsuarioResponse();
+  public static PersonResponse fromEntity(Usuario usuario) {
+    PersonResponse dto = new PersonResponse();
 
     dto.setId(usuario.getId());
     dto.setNome(usuario.getNome());

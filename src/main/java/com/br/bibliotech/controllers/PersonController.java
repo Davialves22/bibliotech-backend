@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.bibliotech.api.Usuario.UsuarioRequest;
-import com.br.bibliotech.controllers.docs.UsuarioControllerDocs;
+import com.br.bibliotech.api.person.PersonRequest;
+import com.br.bibliotech.controllers.docs.PersonControllerDocs;
 import com.br.bibliotech.model.usuario.Usuario;
-import com.br.bibliotech.service.UsuarioService;
+import com.br.bibliotech.service.PersonService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -28,10 +28,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @CrossOrigin
 
 @Tag(name = "People", description = "Endpoints para Tratamento de usuarios")
-public class UsuarioController implements UsuarioControllerDocs {
+public class PersonController implements PersonControllerDocs {
 
         @Autowired
-        private UsuarioService usuarioService;
+        private PersonService usuarioService;
 
         // Criar usuário
         @PostMapping(consumes = {
@@ -41,7 +41,7 @@ public class UsuarioController implements UsuarioControllerDocs {
         })
 
         @Override
-        public ResponseEntity<Usuario> save(@RequestBody UsuarioRequest request) {
+        public ResponseEntity<Usuario> save(@RequestBody PersonRequest request) {
                 Usuario usuario = usuarioService.save(request);
                 return new ResponseEntity<>(usuario, HttpStatus.CREATED);
         }
@@ -76,7 +76,7 @@ public class UsuarioController implements UsuarioControllerDocs {
                         MediaType.APPLICATION_YAML_VALUE
         })
         @Override
-        public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody UsuarioRequest request) {
+        public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody PersonRequest request) {
                 usuarioService.update(id, request);
                 return ResponseEntity.ok().build();
         }
