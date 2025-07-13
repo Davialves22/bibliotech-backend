@@ -24,7 +24,7 @@ public class EmailController implements EmailControllerDocs {
   @Override
   public ResponseEntity<String> sendEmail(@RequestBody EmailRequestDto emailRequest) {
     service.sendSimpleEmail(emailRequest);
-    return new ResponseEntity<>("e-Mail Enviado Com Sucesso", HttpStatus.OK);
+    return new ResponseEntity<>("e-Mail Enviado Com Sucesso!", HttpStatus.OK);
   }
 
   @Override
