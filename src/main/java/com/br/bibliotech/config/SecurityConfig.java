@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/api/person/v1/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/usuario/v1").permitAll() // <--- ADICIONE ISSO
+                        .requestMatchers(HttpMethod.POST, "/api/person/v1").permitAll() // <--- ADICIONE ISSO
                         .requestMatchers(HttpMethod.GET, "/api/livro/v1/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/livro/v1/**").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/api/livro/v1/**").authenticated()
