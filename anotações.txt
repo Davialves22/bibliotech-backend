@@ -1,0 +1,35 @@
+{
+  "nome": "João Silva",
+  "dataNascimento": "15/07/1990",
+  "cpf": "12345678901",
+  "foneCelular": "11999999999",
+  "email": "joao@email.com",
+  "senha": "minhaSenha123"
+}
+
+{
+    "id": 52,
+    "nome": "João Silva",
+    "dataNascimento": "15/07/1990",
+    "cpf": "12345678901",
+    "foneCelular": "11999999999",
+    "email": "joao@email.com",
+    "senha": "$2a$10$Ag8Ul48ndPAqC9O9ZxqOE.0hjn0fDCQW4YO4roAWARY4fJWr3Jzee",
+    "role": "ROLE_USER",
+    "enabled": true,
+    "accountNonLocked": true,
+    "authorities": [
+        {
+            "authority": "ROLE_USER"
+        }
+    ],
+    "password": "$2a$10$Ag8Ul48ndPAqC9O9ZxqOE.0hjn0fDCQW4YO4roAWARY4fJWr3Jzee",
+    "username": "joao@email.com",
+    "credentialsNonExpired": true,
+    "accountNonExpired": true
+}
+
+{
+    "email": "joao@email.com",
+    "senha": "minhaSenha123"
+}
