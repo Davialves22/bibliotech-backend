@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.br.bibliotech.api.person.PersonRequest;
-import com.br.bibliotech.model.usuario.Usuario;
+import com.br.bibliotech.model.person.Person;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -27,7 +27,7 @@ public interface PersonControllerDocs {
                                         @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
                                         @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
                         })
-        ResponseEntity<Usuario> save(@RequestBody PersonRequest request);
+        ResponseEntity<Person> save(@RequestBody PersonRequest request);
 
         // Listar todos os usuários
         @Operation(summary = "Listando todos os Usuários", description = "Listando todos os Usuários", tags = {
@@ -42,7 +42,7 @@ public interface PersonControllerDocs {
                                         @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
                                         @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
                         })
-        List<Usuario> listarTodos();
+        List<Person> listarTodos();
 
         // Buscar usuário por ID
         @Operation(summary = "Procurando Pelo Usuário", description = "Procurando Por um Usuário Específico", tags = {
@@ -54,7 +54,7 @@ public interface PersonControllerDocs {
                                         @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
                                         @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
                         })
-        ResponseEntity<Usuario> obterPorID(@PathVariable Long id);
+        ResponseEntity<Person> obterPorID(@PathVariable Long id);
 
         // Atualizar usuário
         @Operation(summary = "Atualizando o Usuário", description = "Atualizando o Usuário Por um ID", tags = {

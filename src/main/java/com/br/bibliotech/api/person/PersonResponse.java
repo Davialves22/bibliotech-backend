@@ -2,7 +2,7 @@ package com.br.bibliotech.api.person;
 
 import java.time.LocalDate;
 
-import com.br.bibliotech.model.usuario.Usuario;
+import com.br.bibliotech.model.person.Person;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +19,7 @@ public class PersonResponse {
   private String email;
 
   // Método de conversão de entidade para DTO
-  public static PersonResponse fromEntity(Usuario usuario) {
+  public static PersonResponse fromEntity(Person usuario) {
     PersonResponse dto = new PersonResponse();
 
     dto.setId(usuario.getId());

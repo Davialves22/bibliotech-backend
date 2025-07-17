@@ -52,3 +52,7 @@ file:
 email:
   subject: "Default Subject"
   message: "Default Message"
+
+jwt:
+    secret: 6f7e10b1a3469c7d8e9f123456789abcdef0123456789abcdef0123456789abcd  
+    expiration: 3600000 # 1h em milissegundos

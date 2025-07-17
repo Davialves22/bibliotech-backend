@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.br.bibliotech.api.person.PersonRequest;
 import com.br.bibliotech.controllers.docs.PersonControllerDocs;
-import com.br.bibliotech.model.usuario.Usuario;
+import com.br.bibliotech.model.person.Person;
 import com.br.bibliotech.service.PersonService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/api/usuario/v1")
+@RequestMapping("/api/person/v1")
 @CrossOrigin
 
 @Tag(name = "People", description = "Endpoints para Tratamento de usuarios")
@@ -41,8 +41,8 @@ public class PersonController implements PersonControllerDocs {
         })
 
         @Override
-        public ResponseEntity<Usuario> save(@RequestBody PersonRequest request) {
-                Usuario usuario = usuarioService.save(request);
+        public ResponseEntity<Person> save(@RequestBody PersonRequest request) {
+                Person usuario = usuarioService.save(request);
                 return new ResponseEntity<>(usuario, HttpStatus.CREATED);
         }
 
@@ -53,7 +53,7 @@ public class PersonController implements PersonControllerDocs {
                         MediaType.APPLICATION_YAML_VALUE
         })
         @Override
-        public List<Usuario> listarTodos() {
+        public List<Person> listarTodos() {
                 return usuarioService.listarTodos();
         }
 
@@ -64,8 +64,8 @@ public class PersonController implements PersonControllerDocs {
                         MediaType.APPLICATION_YAML_VALUE
         })
         @Override
-        public ResponseEntity<Usuario> obterPorID(@PathVariable Long id) {
-                Usuario usuario = usuarioService.obterPorID(id);
+        public ResponseEntity<Person> obterPorID(@PathVariable Long id) {
+                Person usuario = usuarioService.obterPorID(id);
                 return ResponseEntity.ok(usuario);
         }
 
