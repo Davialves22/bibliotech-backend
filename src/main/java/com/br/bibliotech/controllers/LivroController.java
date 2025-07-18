@@ -56,6 +56,17 @@ public class LivroController implements LivroControllerDocs {
         return livroService.listarTodos();
     }
 
+    @GetMapping("/pdf-existe/{id}")
+    public ResponseEntity<Void> verificarSePdfExiste(@PathVariable Long id) {
+        Livro livro = livroService.obterLivroPorID(id);
+
+        if (livro.getPdf() != null) {
+            return ResponseEntity.ok().build(); // Existe
+        }
+
+        return ResponseEntity.notFound().build(); // Não existe
+    }
+
     @GetMapping(value = "/{id}", produces = {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE,
