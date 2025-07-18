@@ -1,0 +1,88 @@
+application:
+name: Define o nome da aplicação Spring Boot, aqui "bibliotech-api".
+Serve para identificar a aplicação em logs e monitoramento.
+
+config:
+import: Permite importar configurações opcionais de um arquivo .env ou .properties externo, para gerenciar variáveis sensíveis separadamente.
+
+datasource:
+Configura o banco de dados PostgreSQL.
+
+driver-class-name: Driver JDBC para conexão com o PostgreSQL.
+
+url: Endereço da base de dados (aqui localhost na porta 5438 com o banco bibliotech_db).
+
+username e password: Credenciais para acessar o banco.
+
+sql:
+init.mode: Sempre inicializa o banco ao iniciar a aplicação, útil para desenvolvimento.
+
+data-locations: Local do script SQL inicial, data.sql dentro do classpath, para popular o banco.
+
+servlet.multipart:
+Configura upload de arquivos via HTTP multipart/form-data.
+
+enabled: Ativa o suporte a upload multipart.
+
+file-size-threshold: Define o tamanho mínimo para que arquivos sejam gravados em disco (2KB aqui).
+
+max-file-size: Tamanho máximo para cada arquivo enviado (500MB).
+
+max-request-size: Tamanho máximo para toda a requisição multipart (500MB).
+
+Essas configurações limitam o tamanho do arquivo que o servidor aceitará.
+
+jpa:
+Configura o JPA/Hibernate para persistência:
+
+ddl-auto: update: Atualiza automaticamente o schema do banco conforme as entidades Java.
+
+show-sql: true: Exibe as queries SQL no console para debug.
+
+hibernate.dialect: Define o dialeto SQL do PostgreSQL para o Hibernate gerar SQL compatível.
+
+generate-ddl: true: Gera automaticamente DDL (Data Definition Language) para as entidades.
+
+mail:
+Configura o envio de e-mails via SMTP Gmail.
+
+host e port: Servidor SMTP do Gmail.
+
+username e password: Variáveis que serão lidas do .env para autenticação.
+
+properties: Configura TLS para segurança e autenticação.
+
+file.upload_dir:
+IMPORTANTE!
+Esse é o caminho absoluto no sistema de arquivos onde os arquivos enviados (ex: imagens, PDFs) serão armazenados.
+
+No exemplo:
+E:/Projetos-SpringBoot/ihc/bibliotech-backend/src/main/java/com/br/bibliotech/Uploads
+
+O diretório deve existir no computador onde o backend está rodando.
+
+Sempre que o usuário for rodar o backend, precisa alterar esse caminho para o local correto da pasta Uploads no computador dele.
+
+Pode ser um caminho diferente se estiver em Linux/Mac, por exemplo: /home/usuario/projetos/bibliotech-backend/src/main/java/com/br/bibliotech/Uploads
+
+Este caminho deve ser configurado corretamente para o backend salvar os arquivos enviados sem erros.
+
+email:
+Define configurações padrão para assunto e mensagem de e-mail, que podem ser usadas em notificações.
+
+jwt:
+Configurações para autenticação via JWT (JSON Web Token):
+
+secret: Chave secreta para assinar os tokens JWT.
+
+expiration: Tempo de expiração do token, aqui 3600000ms (1 hora).
+
+Resumo prático para rodar o backend:
+Banco de dados: Certifique-se que o PostgreSQL está rodando na porta 5438 com banco bibliotech_db. Ajuste usuário e senha conforme seu ambiente.
+
+Uploads: Edite o valor de file.upload_dir para o caminho absoluto correto da pasta Uploads no seu computador, onde os arquivos enviados ficarão salvos.
+
+Variáveis de ambiente: Crie um arquivo .env com EMAIL_USERNAME e EMAIL_PASSWORD para envio de e-mails.
+
+JWT: O secret deve ser mantido seguro. Pode ser alterado, mas deve ser o mesmo para validar tokens.
+
